@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WebApi42.DAO\WebApi42.Infrastructure.csproj" />
+    <ProjectReference Include="..\WebApi42.DTO\WebApi42.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
