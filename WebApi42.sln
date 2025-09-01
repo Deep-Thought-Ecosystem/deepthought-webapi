@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi42", "WebApi42.API\WebApi42.csproj", "{36BD8B9F-C3AA-47FF-81BC-8B45CB29B56E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi42.API", "WebApi42.API\WebApi42.API.csproj", "{36BD8B9F-C3AA-47FF-81BC-8B45CB29B56E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi42.Bussiness", "WebApi42.Bussiness\WebApi42.Bussiness.csproj", "{00F0C915-343A-407B-82ED-16FE48BA1E90}"
 EndProject
