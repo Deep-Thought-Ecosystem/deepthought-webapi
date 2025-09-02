@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Scalar.AspNetCore;
+using WebApi42.Bussiness;
 using WebApi42.DAO;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +14,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<UserDBCOntext>(options=>
 options.UseSqlServer(builder.Configuration.GetConnectionString("UserDataBase")));
-
+builder.Services.AddScoped<UsersService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

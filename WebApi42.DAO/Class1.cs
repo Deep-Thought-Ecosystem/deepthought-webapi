@@ -16,7 +16,7 @@ namespace WebApi42.DAO
     }
     public class UserDBCOntext(DbContextOptions<UserDBCOntext> options):DbContext(options) 
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> Users => Set<User>();
 
     }
 }
