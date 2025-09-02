@@ -24,7 +24,8 @@ ASP.NET Core Web API project using **MS SQL Server** as the database and **Scala
 
 Start SQL Server 2022 in a container:
 
-```bash
+
+```
 docker run \
   --platform=linux/amd64 \
   -e "ACCEPT_EULA=Y" \
@@ -34,33 +35,34 @@ docker run \
   --name sqlpreview \
   --hostname sqlpreview \
   -d mcr.microsoft.com/mssql/server:2022-latest
-
-	•	Port: 1433
-	•	User: sa
-	•	Password: 123456@Angelo
-
+```
+```
+•	Port: 1433
+•	User: sa
+•	Password: 123456@Angelo
+```
 Connection String
-
+```
 Server=localhost,1433;Database=WebApi42Db;User Id=sa;Password=123456@Angelo;TrustServerCertificate=True;
-
+```
 
 ⸻
 
 ▶️ Running the API
 	1.	Restore packages:
-
+```
 dotnet restore
+```
 
-
-	2.	Apply migrations:
-
+2.	Apply migrations:
+```
 dotnet ef database update --project WebApi42.Infrastructure
+```
 
-
-	3.	Run the API:
-
+3.	Run the API:
+```
 dotnet run --project WebApi42.Api
-
+```
 
 
 ⸻
@@ -69,7 +71,7 @@ dotnet run --project WebApi42.Api
 
 Scalar replaces Swagger as the API explorer UI.
 	•	When the app is running, open:
-http://localhost:5000/scalar (or whichever port you configured)
+http://localhost:5000/scalar/v1 (or whichever port you configured)
 
 ⸻
 
@@ -97,6 +99,3 @@ WebApi42.sln
 
 MIT License. See LICENSE for details.
 
----
-
-👉 Do you also want me to include **sample SQL Server `CREATE DATABASE` & `CREATE TABLE` scripts** inside the README (so teammates can bootstrap without EF migrations), or will you rely 100% on EF Core migrations?
