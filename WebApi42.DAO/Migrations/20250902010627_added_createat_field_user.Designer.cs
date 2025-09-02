@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApi42.DAO;
 
@@ -11,9 +12,11 @@ using WebApi42.DAO;
 namespace WebApi42.Infrastructure.Migrations
 {
     [DbContext(typeof(UserDBCOntext))]
-    partial class UserDBCOntextModelSnapshot : ModelSnapshot
+    [Migration("20250902010627_added_createat_field_user")]
+    partial class added_createat_field_user
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

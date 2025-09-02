@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32;
 using WebApi42.Bussiness;
+using WebApi42.DTO;
 
 
 namespace WebApi42.Controllers
@@ -12,20 +13,11 @@ namespace WebApi42.Controllers
     public class AuthController(UsersService userService) : ControllerBase
     {
        
-        [HttpGet("register")]
-        public async Task<ActionResult> Register()
+        [HttpPost("register")]
+        public async Task<ActionResult> Register(UserDTO user)
         {
 
-            var user = new DTO.UserDTO
-            {
-                Email = ""
-            ,
-                Name = " "
-            ,
-                Password = " "
-            ,
-                UserName = " "
-            };
+            
 
             var guid=await userService.Add(user);
             return Ok(guid);
