@@ -14,7 +14,7 @@ namespace WebApi42.Controllers
     {
        
         [HttpPost("register")]
-        public async Task<ActionResult> Register(UserDTO user)
+        public async Task<ActionResult> Register(UserRegisterAuthDTO user)
         {
 
             
@@ -25,8 +25,11 @@ namespace WebApi42.Controllers
         }
         [Authorize]
         [HttpGet("login")]
-        public async Task<ActionResult> Login()
+        public async Task<ActionResult> Login(UserLoginAuthDTO userDTO)
+
         {
+            //chack username agains usernmaeDTO
+            //chashHash
 
             return Ok();
 
