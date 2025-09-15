@@ -79,5 +79,12 @@ namespace WebApi42.Controllers
 
         }
 
+        [Authorize]
+        [HttpGet("actionResultMustBeAuthenticated")]
+        public IActionResult actionResultMustBeAuthenticated()
+        {
+            return Ok("ok");
+        }
+
     }
 }
