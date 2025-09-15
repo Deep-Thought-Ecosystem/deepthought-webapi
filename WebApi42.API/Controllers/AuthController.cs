@@ -61,7 +61,8 @@ namespace WebApi42.Controllers
         {
             var claims = new List<Claim>() {
             new Claim(ClaimTypes.Email,user.Email.ToString()),
-            new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
+            new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+            new Claim(ClaimTypes.Role,user.Role.ToString()),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
@@ -83,7 +84,14 @@ namespace WebApi42.Controllers
         [HttpGet("actionResultMustBeAuthenticated")]
         public IActionResult actionResultMustBeAuthenticated()
         {
-            return Ok("ok");
+            return Ok("ok, you are authenticated");
+        }
+
+        [Authorize(Roles ="Admin")]
+        [HttpGet("adminOnlyEndPoint")]
+        public IActionResult adminOnlyEndPoint()
+        {
+            return Ok("ok, you are un admin");
         }
 
     }

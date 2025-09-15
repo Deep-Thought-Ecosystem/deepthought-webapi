@@ -18,6 +18,8 @@ namespace WebApi42.DAO
         public string UserName { get; set; }
         = string.Empty;
 
+        public string Role {  get; set; }= string.Empty;
+
         public TimeSpan CreateAt { get; set; }
 
 

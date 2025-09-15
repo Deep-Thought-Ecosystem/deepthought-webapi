@@ -29,7 +29,8 @@ namespace WebApi42.Bussiness
             {
                 Name = "na",
                 UserName = "na",
-                Email = userDTO.Email
+                Email = userDTO.Email,
+                Role=userDTO.Role
             };
 
             user1.PasswordHashed = new PasswordHasher<User>().HashPassword(user1, userDTO.Password);
