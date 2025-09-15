@@ -2,7 +2,7 @@
 
 namespace WebApi42.DTO
 {
-    public class UserDTO
+    public record UserDTO
     {
 
         public string Name { get; set; }
@@ -16,7 +16,7 @@ namespace WebApi42.DTO
 
     }
 
-    public class UserRegisterAuthDTO
+    public record UserRegisterAuthDTO
     {
 
         [Required]
@@ -27,17 +27,13 @@ namespace WebApi42.DTO
     }
 
 
-    public class UserLoginAuthDTO
+    public record UserLoginAuthDTO
     {
 
         [Required]
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-
-    }
-    public class Class1
-    {
 
     }
 }

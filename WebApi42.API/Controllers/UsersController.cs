@@ -6,7 +6,7 @@ namespace WebApi42.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController(UsersService userService) : ControllerBase
+    public class UsersController(AuthService userService) : ControllerBase
     {
 
        

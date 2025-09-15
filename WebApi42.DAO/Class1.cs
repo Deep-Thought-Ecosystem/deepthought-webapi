@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApi42.DAO
 {
@@ -11,6 +12,7 @@ namespace WebApi42.DAO
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
         public string PasswordHashed { get; set; }
         public string UserName { get; set; }
@@ -24,6 +26,12 @@ namespace WebApi42.DAO
     public class UserDBCOntext(DbContextOptions<UserDBCOntext> options) : DbContext(options)
     {
         public DbSet<User> Users => Set<User>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique(); // ✅ Modern, preferred way
+        }
 
     }
 }

@@ -14,7 +14,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<UserDBCOntext>(options=>
 options.UseSqlServer(builder.Configuration.GetConnectionString("UserDataBase")));
-builder.Services.AddScoped<UsersService>();
+builder.Services.AddScoped<AuthService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
