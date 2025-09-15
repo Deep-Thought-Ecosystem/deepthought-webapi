@@ -1,9 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using WebApi42.DTO;
 
 namespace WebApi42.DAO
 {
-
+    public interface IAuthService
+    {
+        public  Task<User> RegisterAsync(UserRegisterAuthDTO userDTO);
+        public  Task<TokenResponseDTO> LoginAsync(UserLoginAuthDTO id);
+        public Task<TokenResponseDTO> RefreshTokenAsync(RefreshTokenRequestDTO id);
+    }
     public class User
     {
         public User()
@@ -20,7 +26,10 @@ namespace WebApi42.DAO
 
         public string Role {  get; set; }= string.Empty;
 
-        public TimeSpan CreateAt { get; set; }
+        public TimeSpan CreateAt { get;private set; }
+
+        public DateTime? RefreshTokenExpireTime { get; set; }
+        public string? RefreshToekn { get; set; }
 
 
 

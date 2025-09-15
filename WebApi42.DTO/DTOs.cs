@@ -2,6 +2,7 @@
 
 namespace WebApi42.DTO
 {
+
     public record UserDTO
     {
 
@@ -14,6 +15,17 @@ namespace WebApi42.DTO
         = string.Empty;
         public UserDTO() { }
 
+    }
+    public record RefreshTokenRequestDTO
+    {
+        public required Guid UserId { get; set; }
+        public required string RefreshToken { get; set; }
+    }
+    public record TokenResponseDTO
+    {
+        public required string AccessToken { get; set; }
+        public required string RefreshToken { get; set; }
+        // public required DateTime RefreshTokenExpireTime { get; set; }
     }
 
     public record UserRegisterAuthDTO

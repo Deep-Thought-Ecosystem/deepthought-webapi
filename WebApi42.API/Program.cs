@@ -33,7 +33,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true
         };
     });
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IAuthService,AuthService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
