@@ -13,7 +13,7 @@ namespace WebApi42.Bussiness
 {
 
 
-    public class AuthService(UserDBCOntext context, IConfiguration configuration): IAuthService
+    public class AuthService(UserDBCOntext context, IConfiguration configuration) : IAuthService
     {
 
         public async Task<User> RegisterAsync(UserRegisterAuthDTO userDTO)
@@ -29,7 +29,7 @@ namespace WebApi42.Bussiness
                 Name = "na",
                 UserName = "na",
                 Email = userDTO.Email,
-                Role=userDTO.Role
+                Role = userDTO.Role
             };
 
             user1.PasswordHashed = new PasswordHasher<User>().HashPassword(user1, userDTO.Password);
@@ -69,9 +69,9 @@ namespace WebApi42.Bussiness
         private string GenerateTocken(User user)
         {
             var claims = new List<Claim>() {
-            new Claim(ClaimTypes.Email,user.Email.ToString()),
-            new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
-            new Claim(ClaimTypes.Role,user.Role.ToString()),
+                new Claim(ClaimTypes.Email,user.Email.ToString()),
+                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+                new Claim(ClaimTypes.Role,user.Role.ToString()),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
@@ -90,7 +90,7 @@ namespace WebApi42.Bussiness
         }
         private async Task<User?> ValidateRefreshTokenAsync(Guid userId, string refreshToken)
         {
-            var user=await context.Users.FirstOrDefaultAsync(e => e.Id == userId);
+            var user = await context.Users.FirstOrDefaultAsync(e => e.Id == userId);
             if (user is null || user.RefreshToekn != refreshToken || user.RefreshTokenExpireTime <= DateTime.Now)
             {
                 return null;
@@ -100,7 +100,7 @@ namespace WebApi42.Bussiness
         }
         private async Task<string> GenerateAndSaveRefreshTokenAsync(User user)
         {
-           var refreshToken = generateRefreshToken();
+            var refreshToken = generateRefreshToken();
             user.RefreshToekn = refreshToken;
             user.RefreshTokenExpireTime = DateTime.Now.AddDays(7);
             //context.Users.Update(user);
@@ -119,7 +119,7 @@ namespace WebApi42.Bussiness
 
         public async Task<TokenResponseDTO?> RefreshTokenAsync(RefreshTokenRequestDTO id)
         {
-            var user =await ValidateRefreshTokenAsync(id.UserId, id.RefreshToken);
+            var user = await ValidateRefreshTokenAsync(id.UserId, id.RefreshToken);
             if (user is null)
             {
                 return null;

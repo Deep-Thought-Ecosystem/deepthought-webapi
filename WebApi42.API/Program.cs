@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
@@ -36,15 +37,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddScoped<IAuthService,AuthService>();
 var app = builder.Build();
 
+// If Nginx terminates TLS, keep HTTPS redirection OFF here.
+// Respect X-Forwarded-* from Nginx:
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    // Optionally restrict:
+    // KnownProxies = { IPAddress.Parse("10.0.0.10") }
+});
+
+
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.MapOpenApi();
+app.MapOpenApi();
     app.MapScalarApiReference();
 //}
 
 //app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
