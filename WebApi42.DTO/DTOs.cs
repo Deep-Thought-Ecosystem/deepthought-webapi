@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Net;
 
 namespace WebApi42.DTO
 {
@@ -13,6 +14,7 @@ namespace WebApi42.DTO
     {
         public required string AccessToken { get; set; }
         public required string RefreshToken { get; set; }
+        public string? HostIpAddress { get; set; }
         // public required DateTime RefreshTokenExpireTime { get; set; }
     }
 

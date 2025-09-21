@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -63,7 +64,17 @@ namespace WebApi42.Bussiness
         {
             var toekn = GenerateTocken(user);
             var refreshToekn = await GenerateAndSaveRefreshTokenAsync(user);
-            return new TokenResponseDTO { AccessToken = toekn, RefreshToken = refreshToekn };
+            // Get the host name of the machine running the API
+            string hostName = Dns.GetHostName();
+
+            // Get the IP addresses associated with that host name
+            IPHostEntry ipHostEntry = Dns.GetHostEntry(hostName);
+
+            // Find the first IPv4 address (you might need to adjust based on your network)
+            IPAddress hostIpAddress = ipHostEntry.AddressList
+                .FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+
+            return new TokenResponseDTO { AccessToken = toekn, RefreshToken = refreshToekn, HostIpAddress= hostIpAddress.ToString() };
         }
 
         private string GenerateTocken(User user)
