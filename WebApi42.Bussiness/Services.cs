@@ -80,7 +80,7 @@ namespace WebApi42.Bussiness
                 localHostIPADddress = "";
             }
 
-            return new TokenResponseDTO { AccessToken = toekn, RefreshToken = refreshToekn, HostIpAddress = localHostIPADddress };
+            return new TokenResponseDTO { AccessToken = toekn, RefreshToken = refreshToekn, HostIpAddress = localHostIPADddress, HostName= hostName };
         }
 
         private string GenerateTocken(User user)
