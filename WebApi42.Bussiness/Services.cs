@@ -105,10 +105,10 @@ namespace WebApi42.Bussiness
             var toekn = GenerateTocken(user);
             var refreshToekn = await GenerateAndSaveRefreshTokenAsync(user);
             // Get the host name of the machine running the API
-            var (hostBridgeIp, hostBridgeMac) = GetDockerHostBridgeInfo();
-
-
-            return new TokenResponseDTO { AccessToken = toekn, RefreshToken = refreshToekn, HostIpAddress = hostBridgeIp, HostName= hostBridgeMac };
+            var hostLanIp = Environment.GetEnvironmentVariable("HOST_LAN_IP");
+            var hostName = Environment.GetEnvironmentVariable("HOST_NAME");
+            (hostLanIp, _) = hostLanIp is not null ? (hostLanIp, null) : GetDockerHostBridgeInfo();
+            return new TokenResponseDTO { AccessToken = toekn, RefreshToken = refreshToekn, HostIpAddress = hostLanIp, HostName= hostName };
         }
 
         private string GenerateTocken(User user)
