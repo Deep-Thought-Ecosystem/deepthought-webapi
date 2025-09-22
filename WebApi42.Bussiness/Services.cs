@@ -66,8 +66,10 @@ namespace WebApi42.Bussiness
             var refreshToekn = await GenerateAndSaveRefreshTokenAsync(user);
             // Get the host name of the machine running the API
             string localHostIPADddress = "";
+            string hostName = "";
             try
             {
+                hostName = Dns.GetHostName();
                 localHostIPADddress = Dns.GetHostEntry(Dns.GetHostName())
                     .AddressList
                     .FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?
